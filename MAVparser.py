@@ -52,7 +52,7 @@ finalGPS['relLong'] = (finalGPS['longitude'] - centLong) * 110540
 finalGPS['relAlt'] = finalGPS['altitude'] - centAlt
 finalGPS['relTime'] = (finalGPS['time'] - finalGPS.iloc[0].time)
 
-finalGPS = finalGPS[715:802].copy()
+# finalGPS = finalGPS[715:802].copy()
 
 # finalGPS.to_excel('C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/finalGPS.xlsx', index=False)
 
@@ -74,7 +74,7 @@ fig = px.scatter_3d(finalGPS, x='relLong', y='relLat', z='relAlt',
 
 fig.update_traces(
     marker=dict(
-        size=8
+        size=4
         )
     )
 
@@ -92,8 +92,7 @@ fig.update_layout(
             showgrid=True,
             tickformat='.1f'
             ),
-        aspectmode='data',
-        margin={'t':0, 'b':0, 'l':0, 'r':0}
+        aspectmode='data'
     )
 )
 fig.show()
