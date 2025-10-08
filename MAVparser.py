@@ -121,7 +121,7 @@ fig.add_trace(
         z=finalGPS['relAlt'],
         mode='markers',
         marker=dict(
-            size=12,
+            size=8,
             color=finalGPS['relTime'],
             colorscale='deep',
             # colorbar=dict(title='Time (s)'),
@@ -140,4 +140,4 @@ fig.update_scenes(
 
 #fig.show()
 
-fig.write_html("C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/droneGPSdata.html")
+fig.write_html("C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/droneGPSdata.html", auto_open=False)
