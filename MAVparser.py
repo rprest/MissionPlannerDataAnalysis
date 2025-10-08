@@ -67,77 +67,83 @@ finalGPS = finalGPS[715:802].copy()
 
 # plt.show()
 
-# fig = px.scatter_3d(finalGPS, x='relLong', y='relLat', z='relAlt', 
-#                     color='relTime',
-#                     color_continuous_scale='Viridis')
+fig = px.scatter_3d(finalGPS, x='relLong', y='relLat', z='relAlt', 
+                    color='relTime',
+                    color_continuous_scale='Viridis')
 
-# fig.update_traces(marker_size=8)
-# fig.update_layout(
-#     scene=dict(
-#         xaxis=dict(
-#             showgrid=True,
-#             tickformat='.1f'
-#             ),
-#         yaxis=dict(
-#             showgrid=True,
-#             tickformat='.1f'
-#             ),
-#         zaxis=dict(
-#             showgrid=True,
-#             tickformat='.1f'
-#             ),
-#         aspectmode='data'
-#     )
-# )
+fig.update_traces(
+    marker=dict(
+        size=8,
+        colorscale='deep'
+        )
+    )
+
+fig.update_layout(
+    scene=dict(
+        xaxis=dict(
+            showgrid=True,
+            tickformat='.1f'
+            ),
+        yaxis=dict(
+            showgrid=True,
+            tickformat='.1f'
+            ),
+        zaxis=dict(
+            showgrid=True,
+            tickformat='.1f'
+            ),
+        aspectmode='data'
+    )
+)
 # fig.show()
 
-fig = make_subplots(
-    rows = 1, cols=2,
-    specs=[[{'type':'scatter'}, {'type':'scatter3d'}]],
-    horizontal_spacing=0.1
-)
+# fig = make_subplots(
+#     rows = 1, cols=2,
+#     specs=[[{'type':'scatter'}, {'type':'scatter3d'}]],
+#     horizontal_spacing=0.1
+# )
 
-fig.add_trace(
-    go.Scatter(
-        x=finalGPS['relLong'],
-        y=finalGPS['relLat'],
-        mode='markers',
-        marker=dict(
-            size=12,
-            color=finalGPS['relTime'],
-            colorscale='deep',
-            # colorbar=dict(title='Time (s)'),
-            showscale=True
-        ),
-        name='2D'
-    ),
-    row=1, col=1
-)
+# fig.add_trace(
+#     go.Scatter(
+#         x=finalGPS['relLong'],
+#         y=finalGPS['relLat'],
+#         mode='markers',
+#         marker=dict(
+#             size=12,
+#             color=finalGPS['relTime'],
+#             colorscale='deep',
+#             # colorbar=dict(title='Time (s)'),
+#             showscale=True
+#         ),
+#         name='2D'
+#     ),
+#     row=1, col=1
+# )
 
-fig.add_trace(
-    go.Scatter3d(
-        x=finalGPS['relLong'],
-        y=finalGPS['relLat'],
-        z=finalGPS['relAlt'],
-        mode='markers',
-        marker=dict(
-            size=8,
-            color=finalGPS['relTime'],
-            colorscale='deep',
-            # colorbar=dict(title='Time (s)'),
-            showscale=True
-        ),
-        name='3D'
-    ),
-    row=1, col=2
-)
+# fig.add_trace(
+#     go.Scatter3d(
+#         x=finalGPS['relLong'],
+#         y=finalGPS['relLat'],
+#         z=finalGPS['relAlt'],
+#         mode='markers',
+#         marker=dict(
+#             size=8,
+#             color=finalGPS['relTime'],
+#             colorscale='deep',
+#             # colorbar=dict(title='Time (s)'),
+#             showscale=True
+#         ),
+#         name='3D'
+#     ),
+#     row=1, col=2
+# )
 
-fig.update_scenes(
-    aspectmode='data',
-    row=1, col=2
-)
+# fig.update_scenes(
+#     aspectmode='data',
+#     row=1, col=2
+# )
 
 
 #fig.show()
 
-fig.write_html("C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/droneGPSdata.html", auto_open=False)
+fig.write_html("C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/droneGPSdata2.html", auto_open=False)
