@@ -92,7 +92,8 @@ fig.update_layout(
             showgrid=True,
             tickformat='.1f'
             ),
-        aspectmode='data'
+        aspectmode='data',
+        margin={'t':0, 'b':0, 'l':0, 'r':0}
     )
 )
 fig.show()
