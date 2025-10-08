@@ -69,12 +69,12 @@ finalGPS = finalGPS[715:802].copy()
 
 fig = px.scatter_3d(finalGPS, x='relLong', y='relLat', z='relAlt', 
                     color='relTime',
-                    color_continuous_scale='Viridis')
+                    color_continuous_scale='deep'
+                    )
 
 fig.update_traces(
     marker=dict(
-        size=8,
-        colorscale='deep'
+        size=8
         )
     )
 
@@ -95,7 +95,7 @@ fig.update_layout(
         aspectmode='data'
     )
 )
-# fig.show()
+fig.show()
 
 # fig = make_subplots(
 #     rows = 1, cols=2,
@@ -146,4 +146,4 @@ fig.update_layout(
 
 #fig.show()
 
-fig.write_html("C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/droneGPSdata2.html", auto_open=False)
+fig.write_html("C:/Users/ryan/OneDrive/DroneProjects/MissionPlannerDataAnalysis/Data/droneGPSdata2.html")
