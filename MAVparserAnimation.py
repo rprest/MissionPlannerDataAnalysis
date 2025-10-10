@@ -67,20 +67,21 @@ class DronePathAnimation(Scene):
 
         axes = Axes(
             x_range=[xScaled.min() - 1, xScaled.max() + 1, 1],
-            y_range=[yScaled.min() - 1, yScaled.max() + 1, 1],
+            y_range=[yScaled.min() - 0.5, yScaled.max() + 0.5, 1],
             x_length=10,
             y_length=10,
-            axis_config={"include_tip": False}
+            axis_config={"include_tip": False, "color": BLACK},
         )
 
         self.add(axes)
 
         points = [axes.c2p(xScaled[i], yScaled[i]) for i in range(len(xScaled))]
 
-        drone = Dot(points[0], color=BLUE, radius=0.1)
+        drone = Dot(points[0], color=BLUE, radius=0.15)
 
-        path = VMobject(color=RED)
-        path.set_points_as_corners([points[0], points[0]])
+        path = VMobject(points[0], color=RED)
+        # path = VMobject(color=RED)
+        # path.set_points_as_corners([points[0], points[0]])
 
         self.add(drone, path)
 
@@ -90,17 +91,27 @@ class DronePathAnimation(Scene):
 
             mob.move_to(points[idx])
 
+        devPts = []
+
         def update_path(mob, alpha):
 
             idx = int(alpha * (len(points) - 1))
 
-            mob.set_points_as_corners(points[:idx + 1])
+            mob.set_points_smoothly(points[:idx + 1])
+
+            while len(devPts) <= idx:
+                new_pt = len(devPts)
+                new_dot = Dot(points[new_pt], color=RED, radius=0.15)
+                new_dot.set_opacity(0)
+                devPts.append(new_dot)
+                self.add(new_dot)
+                self.play(FadeIn(new_dot), run_time=0.1)
 
         self.play(
             UpdateFromAlphaFunc(path, update_path),
             UpdateFromAlphaFunc(drone, update_drone),
             run_time=10,
-            rate_func=linear
+            rate_func=smooth
         )
 
         self.wait(1)
